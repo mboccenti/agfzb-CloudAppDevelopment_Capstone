@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Contact Us</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Contact Us</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
 
     <body>
-        <h3>Contact Us</h3>
-        <p>Phone: +1-123-456-7890</p>
-        <p>Address: USA</p>
+
+        <!--Add a nav bar here -->
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Home</a>  
+                </div>
+                <a class="nav-link" href="{% url 'djangoapp:about' %}">About Us</a>
+                <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                        <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" name="username" >
+                                <input type="password" class="form-control" placeholder="Password" name="psw" >
+                                <button class="btn btn-primary" type="submit">Login</button>
+                                <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                            </div>
+                        </form>
+                    </li>
+                    {% endif %}                  
+                </ul>           
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <address>
+                        <strong>Best Cars</strong><br>
+                            1234 ABC Street<br>
+                            Four Wheels, Alaska 99999<br>
+                        <abbr title="Phone">Phone:</abbr> (123) 456-7890
+                    </address>
+                </div>
+            </div>
+        </div>
+
     </body>
+
 </html>

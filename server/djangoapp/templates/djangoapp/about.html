@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-    <title>About Us</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>About Us</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
 
     <body>
-        <h1>
-        About Us
-        </h1>
 
-        <p>Welcome to Best Cars dealership, home to the best cars in North America. We sell domestic and imported cars at reasonable prices.</p>
+        <!--Add a nav bar here -->
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Home</a>  
+                </div>
+                <a class="nav-link" href="{% url 'djangoapp:about' %}">About Us</a>
+                <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                        <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" name="username" >
+                                <input type="password" class="form-control" placeholder="Password" name="psw" >
+                                <button class="btn btn-primary" type="submit">Login</button>
+                                <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                            </div>
+                        </form>
+                    </li>
+                    {% endif %}                  
+                </ul>           
+            </div>
+        </nav>
+
+        <h1>
+            Welcome to Best Cars dealership, home to the best cars in North America. 
+        </h1>
+            We sell domestic and imported cars at reasonable prices.
+        
 
     </body>
+
 </html>
