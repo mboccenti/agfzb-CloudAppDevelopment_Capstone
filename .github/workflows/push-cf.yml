@@ -4,7 +4,7 @@ on: workflow_dispatch
 # Test commit
 # Environment variables available to all jobs and steps in this workflow
 env:
-  IBM_CLOUD_REGION: en-gb
+  IBM_CLOUD_REGION: eu-gb
   IBM_CLOUD_GROUP: default
   IBM_CLOUD_SPACE: djangoserver-space
   IBM_CLOUD_ORG: marco.boccenti@gmail.com
